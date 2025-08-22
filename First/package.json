@@ -1,0 +1,14 @@
+{
+  "name": "react-one",
+  "version": "1.0.0",
+  "description": "npm details",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Mahima",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.15.4"
+  }
+}
