@@ -27,9 +27,9 @@
 .restaurant-card{
     width: 200px;
     /* height: 400px; */
-    background-color:burlywood;
+    background-color:#f0f0f0;
     padding: 5px;
-    margin: 5px;
+    margin: 20px;
 }
 
 .restaurant-card:hover{
@@ -54,4 +54,19 @@
     margin: 20px;
     padding: 10px;
     border-radius: 5%;
+}
+
+.shimmer-container{
+   display: flex;
+   flex-wrap: wrap;
+}
+.shimmer-card{
+    margin: 20px;
+    width: 200px;
+    height: 400px;
+    background-color: #f0f0f0;
+}
+
+.login-btn{
+    padding: 5px;
 }

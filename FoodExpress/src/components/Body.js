@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard"
 // import restaurants from "../utils/mockData"
 import { useState, useEffect } from "react"
 import { API_URL } from "../utils/constant";
+import Shimmer from "./Shimmer"
 
 
 
@@ -12,22 +13,33 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-
   }, [])
+  
   const fetchData = async () => {
       const restData = await fetch(API_URL);
       const jsonRestData = await restData.json();
-      setListOfRestaurants(jsonRestData.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+      console.log(jsonRestData)
+      setListOfRestaurants(jsonRestData.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
   }
 
   const filterData = () => {
     const data = listOfRestaurants.filter((restaurant) => {
-      return restaurant.info.avgRating >= 4.2;
+      return restaurant.info.avgRating >= 4.3;
     })
   // console.log("Button clicked")
   setListOfRestaurants(data);
   }
-  return (
+
+  // // console.log("Component Rendered")
+  // //******Conditional Rendering */
+  // if (listOfRestaurants.length === 0) {
+  //   return <Shimmer />
+  // }
+
+
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+    ) : (
     <div className="body">
 
       <button className="filter-btn" onClick={filterData}>Top Rated Restaurants</button>
