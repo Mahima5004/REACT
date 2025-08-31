@@ -12,7 +12,8 @@
   "dependencies": {
     "parcel": "^2.15.4",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.2"
   },
   "browserlist": [
     "last 2 version"

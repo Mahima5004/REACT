@@ -11,6 +11,9 @@ const Body = () => {
 
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
+  const [searchText, setSearchText] = useState("");
+  const [filteredRestaurant, setFilteredRestaraunt] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, [])
@@ -18,8 +21,9 @@ const Body = () => {
   const fetchData = async () => {
       const restData = await fetch(API_URL);
       const jsonRestData = await restData.json();
-      console.log(jsonRestData)
-      setListOfRestaurants(jsonRestData.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+      // console.log(jsonRestData)
+    setListOfRestaurants(jsonRestData.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    setFilteredRestaraunt(jsonRestData.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
   }
 
   const filterData = () => {
@@ -30,7 +34,13 @@ const Body = () => {
   setListOfRestaurants(data);
   }
 
-  // // console.log("Component Rendered")
+  const searchRestaurant = () => {
+    const newRestaurants = listOfRestaurants.filter(res => (
+      res?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
+    ))
+    setFilteredRestaraunt(newRestaurants)
+  }
+ 
   // //******Conditional Rendering */
   // if (listOfRestaurants.length === 0) {
   //   return <Shimmer />
@@ -41,12 +51,30 @@ const Body = () => {
     <Shimmer />
     ) : (
     <div className="body">
-
-      <button className="filter-btn" onClick={filterData}>Top Rated Restaurants</button>
+        <div className="filter">
+            <button
+             className="filter-btn"
+             onClick={filterData}>
+             Top Rated Restaurants
+            </button>
+          <input
+            type="text"
+            className="search-text"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value)
+            }}
+          />
+          <button className="filter-btn" onClick={
+            //Filter out the searched restaurant and update the UI
+            searchRestaurant
+          }>
+          Search</button>
+        </div>
 
       <div className="restaurant-container">
         {/* //Restaurant Card */}
-        {listOfRestaurants.map((restaurant) => {
+        {filteredRestaurant.map((restaurant) => {
           const { id,name, cuisines, avgRating, sla,cloudinaryImageId, aggregatedDiscountInfoV3} = restaurant.info;
           const resObj = {
             resName: name,
