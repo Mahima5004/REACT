@@ -3,7 +3,7 @@ import RestaurantCard from "./RestaurantCard"
 import { useState, useEffect } from "react"
 import { API_URL } from "../utils/constant";
 import Shimmer from "./Shimmer"
-
+import { Link } from "react-router-dom"
 
 
 //Body
@@ -84,7 +84,14 @@ const Body = () => {
             imgId: cloudinaryImageId,
             offer: (aggregatedDiscountInfoV3?.header || "NA") + (aggregatedDiscountInfoV3?.subHeader || "NA")
           }
-            return < RestaurantCard key = { id } resData = { resObj } />
+          return (
+          <Link
+            key={id}
+            to={"/restaurant/" + id}
+            className="rest-card">
+            <RestaurantCard resData={resObj} />
+          </Link>
+          )
         })}  
       </div>
     </div>
