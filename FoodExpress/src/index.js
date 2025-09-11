@@ -6,7 +6,6 @@ import Contact from "./components/Contact"
 import Error from "./components/Error"
 import Body from "./components/Body"
 import RestaurantMenu from "./components/RestaurantMenu"
-import UserClass from "./components/UserClass"
 
 const routerElement = createBrowserRouter([
   {
@@ -30,10 +29,6 @@ const routerElement = createBrowserRouter([
         path: "restaurant/:resId", //this resId is dynamic here it can be anything
         element: <RestaurantMenu />
       },
-      {
-        path: "user",
-        element: <UserClass name="Mahima" address = "Gurugram" />
-      }
     ]
   }
 ])

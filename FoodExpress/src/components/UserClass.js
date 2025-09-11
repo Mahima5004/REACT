@@ -5,28 +5,57 @@ class UserClass extends React.Component {
         super(props)
         
         this.state = {
-            count1: 1,
-            count2: 2
+            // count1: 1,
+            // count2: 2
+            user: {
+                name: "Dummy",
+                location: "DummyPlace",
+            }
+        
         }
-     }
+        console.log("Costructor called")
+    }
+    
+   async componentDidMount() {
+       console.log("Component Did Mounted")
+       const userdata = await fetch("https://api.github.com/users/Mahima5004");
+       const jsonUserData = await userdata.json();
+       console.log(jsonUserData)
+
+       this.setState({
+           user : jsonUserData
+       })
+    }
+
+    componentDidUpdate() {
+        console.log("Component updated");
+    }
+
+    componentWillUnmount() {
+        console.log("Component Unmounted")
+    }
 
     render() {
 
-        const {count1, count2} = this.state //destructuring the object
+        console.log("Component Rendered")
+
+        // const {count1, count2} = this.state //destructuring the object
+        const { name, location, avatar_url } = this.state.user;
        
         return (
             <div className="user-class">
                 <h2>Hi there this is a Class based component</h2>
-                <h3>{this.props.name}</h3>
-                <h4>{this.props.address}</h4>
-                <p>Count : {count1}</p>
+                <img src={avatar_url} alt="avatar_url" />
+                <h3>{name}</h3>
+                <h4>{location}</h4>
+                {/* <p>Count : {count1}</p>
                 <button
                     onClick={() => {
                         this.setState({
                             count1: this.state.count1 + 1,
                         })
                 }}
-                >Update the count</button>
+                >Update the count</button> */}
             </div>
         )
    }
