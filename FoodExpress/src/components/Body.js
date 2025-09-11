@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { API_URL } from "../utils/constant";
 import Shimmer from "./Shimmer"
 import { Link } from "react-router-dom"
+import useInternetStatus from "../utils/useInternetStatus"
 
 
 //Body
@@ -13,6 +14,7 @@ const Body = () => {
 
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurant, setFilteredRestaraunt] = useState([]);
+
 
   useEffect(() => {
     fetchData();
@@ -30,7 +32,7 @@ const Body = () => {
     const data = listOfRestaurants.filter((restaurant) => {
       return restaurant.info.avgRating >= 4.3;
     })
-  // console.log("Button clicked")
+
   setListOfRestaurants(data);
   }
 
@@ -41,12 +43,10 @@ const Body = () => {
     setFilteredRestaraunt(newRestaurants)
   }
  
-  // //******Conditional Rendering */
-  // if (listOfRestaurants.length === 0) {
-  //   return <Shimmer />
-  // }
-
-
+ 
+  const internetStatus = useInternetStatus();
+  if (!internetStatus) return (<h1> ⚠️Seems like you are offline... Please check your internet connectivity</h1>)
+  
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
     ) : (
