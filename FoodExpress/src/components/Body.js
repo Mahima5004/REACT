@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard"
+import RestaurantCard, {promotedResCard} from "./RestaurantCard"
 // import restaurants from "../utils/mockData"
 import { useState, useEffect } from "react"
 import { API_URL } from "../utils/constant";
@@ -12,7 +12,7 @@ const Body = () => {
 
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("Seach here...");
   const [filteredRestaurant, setFilteredRestaraunt] = useState([]);
 
 
@@ -30,10 +30,9 @@ const Body = () => {
 
   const filterData = () => {
     const data = listOfRestaurants.filter((restaurant) => {
-      return restaurant.info.avgRating >= 4.3;
+      return restaurant.info.avgRating >= 4.5;
     })
-
-  setListOfRestaurants(data);
+  setFilteredRestaraunt(data);
   }
 
   const searchRestaurant = () => {
@@ -43,36 +42,39 @@ const Body = () => {
     setFilteredRestaraunt(newRestaurants)
   }
  
+  // const PromotedRestaurantCard = promotedResCard(RestaurantCard);
  
   const internetStatus = useInternetStatus();
   if (!internetStatus) return (<h1> ⚠️Seems like you are offline... Please check your internet connectivity</h1>)
   
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
-    ) : (
-    <div className="body">
-        <div className="filter">
-            <button
-             className="filter-btn"
-             onClick={filterData}>
-             Top Rated Restaurants
-            </button>
-          <input
+    ) : ( 
+    <div className="w-11/12 md:w-9/12 mx-auto pt-24">
+        <div className="flex justify-between">
+          <div>
+             <input
             type="text"
-            className="search-text"
+            className="p-4 border-solid  bg-gray-100 rounded-xl"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value)
             }}
           />
-          <button className="filter-btn" onClick={
+          <button className="p-3 m-5 bg-amber-700 rounded-2xl text-white w-30 cursor-pointer" onClick={
             //Filter out the searched restaurant and update the UI
             searchRestaurant
           }>
-          Search</button>
+            Search</button>
+          </div>
+          <button 
+             className="px-4 m-5 bg-amber-700 rounded-2xl text-white cursor-pointer"
+             onClick={filterData}>
+             Top Rated Restaurants
+            </button>
         </div>
 
-      <div className="restaurant-container">
+      <div className="flex flex-wrap gap-6">
         {/* //Restaurant Card */}
         {filteredRestaurant.map((restaurant) => {
           const { id,name, cuisines, avgRating, sla,cloudinaryImageId, aggregatedDiscountInfoV3} = restaurant.info;
@@ -88,7 +90,7 @@ const Body = () => {
           <Link
             key={id}
             to={"/restaurant/" + id}
-            className="rest-card">
+            >
             <RestaurantCard resData={resObj} />
           </Link>
           )

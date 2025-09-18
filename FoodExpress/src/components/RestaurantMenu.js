@@ -24,8 +24,8 @@ const RestaurantMenu = () => {
     
     
     return (
-        <div className="rest-menu">
-            <h1>{name}</h1>
+        <div className="my-30 p-2 mx-4">
+            <h1 className="font-bold text-2xl">{name}</h1>
             <h2>Cuisines - {cuisines.join(", ")}</h2>
             <h3>{costForTwoMessage} - {avgRating}✳️</h3>
             <h1>Recommended</h1>

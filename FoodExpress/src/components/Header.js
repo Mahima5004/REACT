@@ -9,20 +9,21 @@ const Header = () => {
   const internetStatus = useInternetStatus(); 
 
   return (
-    <div className="px-4 flex justify-between bg-orange-100 shadow-amber-800 items-center">
-      <div className="logo-component">
+    <div className="fixed top-0 left-0 right-0 flex justify-between shadow-lg shadow-gray-100 items-center bg-white font-medium">
+      <div className="logo-component flex items-center text-lg font-bold">
         <img className="w-20" src={LOGO_URL} />  
+        Food Express
       </div>
       <div className="nav-components">
-        <ul className="flex m-4">
-          <li className="px-4">Online Status: {internetStatus ? "🟢" : "🔴"}</li>
-          <li className="px-4"><Link to="/grocery">Grocery</Link></li>
-          <li className="px-4"><Link to= "/">Home</Link></li>
-          <li className="px-4"><Link to= "/about">About Us</Link></li>
-          <li className="px-4"><Link to= "/contact">Contact Us</Link></li>
-          <li className="px-4"><Link to= "/cart">Cart</Link></li>
-          <li className="px-4"><button
-            className="login-btn"
+        <ul className="flex m-4 gap-10 items-center">
+          <li>Online Status: {internetStatus ? "🟢" : "🔴"}</li>
+          <li><Link to="/grocery">Grocery</Link></li>
+          <li><Link to= "/">Home</Link></li>
+          <li><Link to= "/about">About Us</Link></li>
+          <li><Link to= "/contact">Contact Us</Link></li>
+          <li><Link to= "/cart">Cart</Link></li>
+          <li><button
+            className=" bg-amber-700 rounded-2xl text-white cursor-pointer p-2"
             onClick={() => {
               btnName === "LOGIN" ?
                 setBtnName("LOGOUT") :
@@ -30,7 +31,7 @@ const Header = () => {
           }}>{btnName}</button></li>
         </ul>
       </div>
-    </div>
+      </div>
   )
 }
 

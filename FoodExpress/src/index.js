@@ -18,7 +18,8 @@ const routerElement = createBrowserRouter([
     children: [
       {
         path: "/",
-        element : <Body />
+        index: true,
+        element: <Body />
       },
       {
         path: "/about",
