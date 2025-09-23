@@ -2,10 +2,13 @@ import Shimmer from "./Shimmer"
 import { useParams } from "react-router-dom"
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import MenuAccordian from "./MenuAccordian"
+import { useState } from "react";
 
 
 const RestaurantMenu = () => {
-    
+
+
+    const [showIndex, setShowIndex] = useState(0);
    
     const { resId } = useParams();
     
@@ -17,12 +20,11 @@ const RestaurantMenu = () => {
     const restaurantInfo = menuData?.cards[2]?.card?.card?.info;
     const menuSection = menuData?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards 
 
-    // const menuList = menuSection[1]?.card?.card?.itemCards
     const menuCategory = menuSection.filter((category) => 
         category?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     )
              
-    const { id, name, costForTwoMessage, cuisines, avgRating } = restaurantInfo;
+    const { name, costForTwoMessage, cuisines, avgRating } = restaurantInfo;
 
     
     
@@ -32,11 +34,14 @@ const RestaurantMenu = () => {
             <h2>Cuisines - {cuisines.join(", ")}</h2>
             <h3>{costForTwoMessage} - {avgRating}✳️</h3>
 
-            {menuCategory.map((category) => (
-                <MenuAccordian data={category?.card?.card} />
+            {menuCategory.map((category, index) => (
+                <MenuAccordian
+                    key={category?.card?.card?.title}
+                    data={category?.card?.card}
+                    showItems={index === showIndex}
+                    onShowIndex={() => setShowIndex(index === showIndex ? null : index)} />
             ))}
             
-            {/* <MenuAccordian /> */}
         </div>
 
         

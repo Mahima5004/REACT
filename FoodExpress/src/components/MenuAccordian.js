@@ -1,16 +1,22 @@
+import { useState } from "react";
 import MenuItem from "./MenuItem";
 
-const MenuAccordian = ({data}) => {
+const MenuAccordian = ({ data , showItems, onShowIndex}) => {
+    
+
     return (
-        <div className="bg-gray-100 shadow-lg">
-            <div className=" m-6 p-4 flex justify-between ">
+        <div className=" shadow-lg cursor-pointer" onClick={onShowIndex}>
+            <div className=" m-6 p-4 flex justify-between bg-gray-100">
                 <h1 className="font-bold">{data?.title} ({data?.itemCards.length})</h1>
                 <p>🔽</p>
             </div>
 
-            {data?.itemCards.map((item) => (
-                <MenuItem item={item} key = {item?.info?.id} />
-            ))}
+            {
+                 showItems && (data?.itemCards.map((item) => (
+
+                <MenuItem key = {item?.card?.info?.id} item={item} />
+                
+            )))}
         </div>
     )
 }

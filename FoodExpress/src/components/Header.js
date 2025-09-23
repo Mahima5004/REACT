@@ -1,13 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { LOGO_URL } from "../utils/constant"
 import { Link } from "react-router-dom"
 import useInternetStatus from "../utils/useInternetStatus"
+import UserContext from "../utils/UserContext"
 
 const Header = () => {
 
   const [btnName, setBtnName] = useState("LOGIN");
   const internetStatus = useInternetStatus(); 
+  const {loggedUser} = useContext(UserContext);
 
+  
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-between shadow-lg shadow-gray-100 items-center bg-white font-medium">
       <div className="logo-component flex items-center text-lg font-bold">
@@ -17,6 +20,7 @@ const Header = () => {
       <div className="nav-components">
         <ul className="flex m-4 gap-10 items-center">
           <li>Online Status: {internetStatus ? "🟢" : "🔴"}</li>
+          <li className="p-2 bg-amber-700 text-white rounded-xl">{ loggedUser }</li>
           <li><Link to="/grocery">Grocery</Link></li>
           <li><Link to= "/">Home</Link></li>
           <li><Link to= "/about">About Us</Link></li>

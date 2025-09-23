@@ -1,10 +1,11 @@
 import RestaurantCard, {promotedResCard} from "./RestaurantCard"
 // import restaurants from "../utils/mockData"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { API_URL } from "../utils/constant";
 import Shimmer from "./Shimmer"
 import { Link } from "react-router-dom"
 import useInternetStatus from "../utils/useInternetStatus"
+import UserContext from "../utils/UserContext";
 
 
 //Body
@@ -15,6 +16,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("Seach here...");
   const [filteredRestaurant, setFilteredRestaraunt] = useState([]);
 
+  const { loggedUser } = useContext(UserContext)
 
   useEffect(() => {
     fetchData();

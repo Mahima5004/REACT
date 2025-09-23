@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 
 class UserClass extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class UserClass extends React.Component {
             }
         
         }
-        console.log("Costructor called")
+        console.log("Constructor called")
     }
     
    async componentDidMount() {
@@ -56,6 +57,15 @@ class UserClass extends React.Component {
                         })
                 }}
                 >Update the count</button> */}
+                <div>
+                    <UserContext.Consumer>
+                        {
+                            ({ loggedUser }) => 
+                                <h2 className="font-bold">{loggedUser}</h2>
+                        }
+                    </UserContext.Consumer>
+                </div>
+                
             </div>
         )
    }
