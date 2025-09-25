@@ -16,7 +16,7 @@ const Header = () => {
 
   
   return (
-    <div className="fixed top-0 left-0 right-0 flex justify-between shadow-lg shadow-gray-100 items-center bg-white font-medium">
+    <div className="left-0 right-0 flex justify-between shadow-lg shadow-gray-100 items-center bg-white font-medium sticky top-0 z-50">
       <div className="logo-component flex items-center text-lg font-bold">
         <img className="w-20" src={LOGO_URL} />  
         Food Express

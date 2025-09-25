@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import MenuItem from './MenuItem';
-import {clearCart} from "../utils/cartSlice"
+import {clearCart} from "../utils/cartSlice.js"
 
 function Cart() {
 
@@ -22,8 +22,8 @@ function Cart() {
                   cartItems.length === 0 ? (
                       <p>Your cart is empty... Please Add items</p>
                   ) :
-                      cartItems.map((item, index) => (
-                      <MenuItem key = {index} item = { item } />
+                      cartItems.map((item) => (
+                      <MenuItem key = {item?.card?.info?.id} item = { item } />
                   ))
               }
           </div>
