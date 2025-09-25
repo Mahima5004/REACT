@@ -9,6 +9,7 @@ const MenuItem = ({ item }) => {
     const handleItem = () => {
         dispatch(addItem(item))
     }
+    
     return (
         <div className="flex justify-between border-b border-gray-300">
             <div className="text-left p-2 m-4 w-9/12">

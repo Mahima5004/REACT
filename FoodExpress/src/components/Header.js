@@ -13,6 +13,7 @@ const Header = () => {
 
   //subscribing to the store using useSelector hook 
   const cartItems = useSelector((store) => store.cart.items)
+
   
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-between shadow-lg shadow-gray-100 items-center bg-white font-medium">
