@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import Header from "./components/Header"
 import { Outlet } from "react-router-dom"
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore"
 
 
 const App = () => {
@@ -14,7 +16,7 @@ const App = () => {
 
     //we made a api call to get userInfo
     const data = {
-      name: "Mahima"
+      name: "UserName"
     }
     setUserName(data?.name)
 
@@ -23,10 +25,12 @@ const App = () => {
 
   return (
     <div className="app">
-      <UserContext.Provider value = {{loggedUser : userName}}>
+      <Provider store={appStore}>
+         <UserContext.Provider value = {{loggedUser : userName, setUserName}}>
           <Header />
           <Outlet />
-      </UserContext.Provider>
+        </UserContext.Provider>
+      </Provider>
     </div>
   )
 }

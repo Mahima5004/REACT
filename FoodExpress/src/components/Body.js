@@ -1,4 +1,4 @@
-import RestaurantCard, {promotedResCard} from "./RestaurantCard"
+import RestaurantCard from "./RestaurantCard"
 // import restaurants from "../utils/mockData"
 import { useState, useEffect, useContext } from "react"
 import { API_URL } from "../utils/constant";
@@ -6,6 +6,7 @@ import Shimmer from "./Shimmer"
 import { Link } from "react-router-dom"
 import useInternetStatus from "../utils/useInternetStatus"
 import UserContext from "../utils/UserContext";
+
 
 
 //Body
@@ -16,7 +17,9 @@ const Body = () => {
   const [searchText, setSearchText] = useState("Seach here...");
   const [filteredRestaurant, setFilteredRestaraunt] = useState([]);
 
-  const { loggedUser } = useContext(UserContext)
+  const { loggedUser, setUserName } = useContext(UserContext);
+
+ 
 
   useEffect(() => {
     fetchData();
@@ -69,11 +72,22 @@ const Body = () => {
           }>
             Search</button>
           </div>
-          <button 
-             className="px-4 m-5 bg-amber-700 rounded-2xl text-white cursor-pointer"
+          <div className="px-4 m-5">
+            <input
+            type="text"
+            className="p-4 border-solid  bg-gray-100 rounded-xl"
+            value={loggedUser}
+            onChange={(e) => {
+              setUserName(e.target.value)
+            }}
+          />
+            <button 
+             className="p-3 mx-2 bg-amber-700 rounded-2xl text-white cursor-pointer"
              onClick={filterData}>
              Top Rated Restaurants
             </button>
+          </div>
+        
         </div>
 
       <div className="flex flex-wrap gap-6">

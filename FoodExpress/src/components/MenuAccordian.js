@@ -5,10 +5,10 @@ const MenuAccordian = ({ data , showItems, onShowIndex}) => {
     
 
     return (
-        <div className=" shadow-lg cursor-pointer" onClick={onShowIndex}>
+        <div className=" shadow-lg cursor-pointer">
             <div className=" m-6 p-4 flex justify-between bg-gray-100">
                 <h1 className="font-bold">{data?.title} ({data?.itemCards.length})</h1>
-                <p>🔽</p>
+                <p onClick={onShowIndex}>🔽</p>
             </div>
 
             {
