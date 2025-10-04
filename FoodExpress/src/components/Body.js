@@ -14,7 +14,7 @@ const Body = () => {
 
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
-  const [searchText, setSearchText] = useState("Seach here...");
+  const [searchText, setSearchText] = useState("");
   const [filteredRestaurant, setFilteredRestaraunt] = useState([]);
 
   const { loggedUser, setUserName } = useContext(UserContext);
@@ -59,7 +59,8 @@ const Body = () => {
         <div className="flex justify-between">
           <div>
              <input
-            type="text"
+              type="text"
+              data-testid = "search-input"
             className="p-4 border-solid  bg-gray-100 rounded-xl"
             value={searchText}
             onChange={(e) => {
@@ -107,7 +108,7 @@ const Body = () => {
             key={id}
             to={"/restaurant/" + id}
             >
-            <RestaurantCard resData={resObj} />
+            <RestaurantCard resData={resObj}/>
           </Link>
           )
         })}  

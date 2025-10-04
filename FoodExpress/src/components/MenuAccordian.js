@@ -14,7 +14,7 @@ const MenuAccordian = ({ data , showItems, onShowIndex}) => {
             {
                  showItems && (data?.itemCards.map((item) => (
 
-                <MenuItem key = {item?.card?.info?.id} item={item} />
+                <MenuItem key = {item?.card?.info?.id} item={item}/>
                 
             )))}
         </div>

@@ -11,7 +11,7 @@ const MenuItem = ({ item }) => {
     }
     
     return (
-        <div className="flex justify-between border-b border-gray-300">
+        <div className="flex justify-between border-b border-gray-300" data-testid = "menu-item">
             <div className="text-left p-2 m-4 w-9/12">
                 <h1 className="font-bold">{name}</h1>
                 <h3 className="font-bold">₹{price ? price / 100 : defaultPrice / 100}</h3>
